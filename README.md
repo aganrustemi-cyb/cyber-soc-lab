@@ -38,13 +38,13 @@ Case creation, triage, and investigation workflows
 
 Enrichment with threat intelligence and automated analysis
 
-### <details>
-  <summary>Click to view lab sctructure for easier navigation</summary>
+Endpoint behavioral monitoring
+
+This build illustrates my ability to deploy, integrate, and operate complex security tooling, replicate adversary activity, and extract meaningful insights through analysis — core competencies expected of entry to mid-level SOC analysts.
+
+<details>
+  <summary>### Click to view lab sctructure for easier navigation</summary>
   
 <img width="490" height="724" alt="brave_ZhAD3j4PTd" src="https://github.com/user-attachments/assets/63fd51d8-2c14-44de-b755-883dcab189d1" />
 
 </details>
-
-Endpoint behavioral monitoring
-
-This build illustrates my ability to deploy, integrate, and operate complex security tooling, replicate adversary activity, and extract meaningful insights through analysis — core competencies expected of entry to mid-level SOC analysts.
