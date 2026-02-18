@@ -40,7 +40,7 @@ Enrichment with threat intelligence and automated analysis
 
 <details>
   <summary>Click to view lab sctructure for easier navigation</summary>
-```
+  ```
   Cyber-SOC-Lab/
 │
 ├── README.md                    ⭐ Landing / Portfolio Homepage
@@ -81,7 +81,6 @@ Enrichment with threat intelligence and automated analysis
 ├── mitre-mapping/               📌 MITRE ATT&CK coverage tracker
 │
 └── resources/                   📎 Helpful external links & guides
-
 ```
 </details>
 
