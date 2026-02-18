@@ -5,7 +5,7 @@
 
 - [Kali Linux - Attacker Platform](#kali-linux-attacker-platform)
 - [OPNsense - Perimeter Firewall](#opnsense-perimeter-firewall)
-- [Wazuh SIEM - Log Aggregation & Detection](#wazuh-siem-log-aggregation-and-detection)
+- [Wazuh SIEM - Log Aggregation Detection](#wazuh-siem-log-aggregation-detection)
 - [TheHive - Case Management](#thehive-case-management)
 - [Cortex - Automated Analysis](#cortex-automated-analysis)
 - [MISP - Threat Intelligence Platform](#misp-threat-intelligence-platform)
@@ -15,39 +15,39 @@
 ---
 
 ## 🛠 Kali Linux - Attacker Platform
-*(Your content here)*
+*(Content here)*
 
 ---
 
 ## 🔥 OPNsense - Perimeter Firewall
-*(Your content here)*
+*(Content here)*
 
 ---
 
-## 📊 Wazuh SIEM - Log Aggregation and Detection
-*(Your content here)*
+## 📊 Wazuh SIEM - Log Aggregation Detection
+*(Content here)*
 
 ---
 
 ## 🐝 TheHive - Case Management
-*(Your content here)*
+*(Content here)*
 
 ---
 
 ## 🤖 Cortex - Automated Analysis
-*(Your content here)*
+*(Content here)*
 
 ---
 
 ## 🧠 MISP - Threat Intelligence Platform
-*(Your content here)*
+*(Content here)*
 
 ---
 
 ## 🛡️ CrowdStrike Falcon - Endpoint Protection EDR
-*(Your content here)*
+*(Content here)*
 
 ---
 
 ## 🔄 How Components Interact
-*(Your content here)*
+*(Content here)*
