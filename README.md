@@ -2,7 +2,7 @@ I designed and deployed a fully isolated Security Operations Center (SOC) home l
 
 This lab incorporates key defensive and investigative technologies — from log aggregation and correlation to case management and threat intelligence — and is configured to ingest, correlate, and act on telemetry generated internally by simulated attacks.
 
-🔧 Architecture & Core Components
+### 🔧 Architecture & Core Components
 
 Attack Simulation & Adversary Emulation
 Using Kali Linux and purpose-built attack vectors to generate realistic threat activity that produces detectable telemetry across defensive stacks.
@@ -24,7 +24,7 @@ CrowdStrike Falcon EDR augments endpoint telemetry, offering real-time behaviora
 
 Together, this stack forms a defense-in-depth SOC environment, capturing the full lifecycle of alert generation, detection, investigation, and response — effectively training for real Tier 1–Tier 2 SOC analyst responsibilities.
 
-🎯 What This Build Demonstrates
+### 🎯 What This Build Demonstrates
 
 This lab goes beyond installing tools: it shows integration, configuration, and workflow orchestration among multiple security systems, replicating a realistic monitoring and response infrastructure similar to what’s used in real SOC teams. The lab has enabled me to practice:
 
@@ -38,50 +38,11 @@ Case creation, triage, and investigation workflows
 
 Enrichment with threat intelligence and automated analysis
 
-<details>
+### <details>
   <summary>Click to view lab sctructure for easier navigation</summary>
-  ```
-  Cyber-SOC-Lab/
-│
-├── README.md                    ⭐ Landing / Portfolio Homepage
-├── ABOUT_ME.md                  ⭐ Short professional overview + contact
-├── CERTIFICATIONS.md            ⭐ Verified security certs list
-├── SKILLS-MATRIX.md             ⭐ Skills you’ve built (tools, tech areas)
-├── LAB-SETUP.md                 ⭐ How your SOC lab / environment is built
-│
-├── cases/
-│   ├── red-team/
-│   │     └── Case-001-Example/
-│   │           ├── README.md     📌 Case write-up
-│   │           ├── evidence/     📸 Screenshots, logs
-│   │           ├── notes.md      🧠 Investigator’s notes
-│   │           └── artifacts/    🗂 Logs, pcap, SIEM exports
-│   └── blue-team/
-│         └── Case-001-Example/
-│               ├── README.md
-│               ├── evidence/
-│               ├── notes.md
-│               └── artifacts/
-│
-├── detection-rules/             📊 Custom SIEM / IDS rules
-│     ├── sigma/
-│     ├── wazuh/
-│     └── splunk/
-│
-├── threat-hunting/              🕵️ Hunt hypotheses & results
-│     ├── TH-001/
-│     └── TH-002/
-│
-├── incident-response/           🚨 Response playbooks & reports
-│     ├── IR-001/
-│     └── IR-002/
-│
-├── tools-configs/               🔧 Configs for SIEM, Sysmon, etc.
-│
-├── mitre-mapping/               📌 MITRE ATT&CK coverage tracker
-│
-└── resources/                   📎 Helpful external links & guides
-```
+  
+<img width="490" height="724" alt="brave_ZhAD3j4PTd" src="https://github.com/user-attachments/assets/63fd51d8-2c14-44de-b755-883dcab189d1" />
+
 </details>
 
 Endpoint behavioral monitoring
