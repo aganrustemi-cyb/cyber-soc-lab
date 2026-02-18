@@ -46,7 +46,6 @@ This build illustrates my ability to deploy, integrate, and operate complex secu
 ### View this spoiler for easier navigation through my documentation
 <details>
   <summary>Click to view lab </summary>
-  
-<pre markdown> ``` Cyber-SOC-Lab/ ├── README.md ⭐ Landing / Portfolio Homepage ├── ABOUT_ME.md ⭐ Professional overview + contact ├── CERTIFICATIONS.md ⭐ Verified security certs list ├── SKILLS-MATRIX.md ⭐ Skills you’ve built ├── LAB-SETUP.md ⭐ SOC environment setup documentation │ ├── cases/ │ ├── red-team/ │ │ └── Case-001-Example/ │ │ ├── README.md 📌 Case write-up │ │ ├── evidence/ 📸 Screenshots & logs │ │ ├── notes.md 🧠 Investigator’s notes │ │ └── artifacts/ 🗂 Raw logs, pcap, exports │ └── blue-team/ │ └── Case-001-Example/ │ ├── README.md │ ├── evidence/ │ ├── notes.md │ └── artifacts/ │ ├── detection-rules/ 📊 Custom SIEM / IDS rules │ ├── sigma/ │ ├── wazuh/ │ └── splunk/ │ ├── threat-hunting/ 🕵️ Hunt hypotheses & results │ ├── TH-001/ │ └── TH-002/ │ ├── incident-response/ 🚨 Response playbooks & reports │ ├── IR-001/ │ └── IR-002/ │ ├── tools-configs/ 🔧 Configs for SIEM, Sysmon, etc. ├── mitre-mapping/ 📌 MITRE ATT&CK coverage tracker └── resources/ 📎 Helpful external links & guides ``` </pre>
+  <img width="423" height="749" alt="brave_xtZIniFb9U" src="https://github.com/user-attachments/assets/0a6c886b-c991-4edd-9cd4-6bf7e925b790" />
 
 </details>
