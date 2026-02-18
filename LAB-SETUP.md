@@ -14,7 +14,7 @@ Click a link to jump to that section below
 
 ---
 
-## Kali Linux - Attacker Platform
+##Kali Linux - Attacker Platform
 
 *(Your content goes here)*
 
