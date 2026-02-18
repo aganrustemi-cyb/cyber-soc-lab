@@ -38,9 +38,8 @@ Click a link to jump to that section below
 
 ---
 
-## OPNsense - Perimeter Firewall
-
-### Configuring and installing
+## OPNsense - Perimeter Firewall 
+-
     -[Downloaded the opnsense.b2 file directly from opnsense.org]
     -[Installed bunzip2 on my Windows main machine and extracted the opnsense b2 file]
     -[Created a new machine with FreeBD12 and two network Adapters. First adapter acting as WAN (My NAT) and the second adapter acting as LAN (VM2) same subnet as my Kali Attack machine.]
