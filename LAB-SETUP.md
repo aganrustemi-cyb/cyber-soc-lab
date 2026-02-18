@@ -6,15 +6,15 @@ This lab setup documents the architecture and selected tools used to replicate a
 
 The goal of this setup is to:
 
---Deploy foundational security tooling that mirrors production SOC stacks
+-Deploy foundational security tooling that mirrors production SOC stacks
 
---Generate meaningful telemetry from simulated attacker activity
+-Generate meaningful telemetry from simulated attacker activity
 
---Correlate and analyze logs across network, endpoint, and SIEM platforms
+-Correlate and analyze logs across network, endpoint, and SIEM platforms
 
---Support incident investigation workflows with case management and automated enrichment
+-Support incident investigation workflows with case management and automated enrichment
 
---Integrate threat intelligence into detection logic and alert triage
+-Integrate threat intelligence into detection logic and alert triage
 
 ## 🚀 Quick Navigation
 Click a link to jump to that section below
