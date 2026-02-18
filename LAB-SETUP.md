@@ -43,17 +43,28 @@ Click a link to jump to that section below
   
 ### Configuration And Installation
 -Downloaded the opnsense.b2 file directly from opnsense.org
+
 -Installed bunzip2 on my Windows main machine and extracted the opnsense b2 file
+
 -Created a new machine with FreeBD12 and two network Adapters. First adapter acting as WAN (My NAT) and the second adapter acting as LAN (VM2) same subnet as my Kali Attack machine.
+
 -Assigned interfaces WAN to em0 and LAN to em1 accordingly
+
 <img width="101" height="44" alt="NVIDIA_Overlay_B0rqavcjFL" src="https://github.com/user-attachments/assets/578aefe8-8a8d-4aa2-a149-388b82beb129" />
--[Set the LAN IPv4 adress on my subnet with 24 bit count, of course. No IPv6 at the moment]
+
+-Set the LAN IPv4 adress on my subnet with 24 bit count, of course. No IPv6 at the moment]
+
  <img width="572" height="371" alt="NVIDIA_Overlay_s5vwOOtNx4" src="https://github.com/user-attachments/assets/9ffb5f53-c739-432e-b7ff-33a1bc14c3e5" />
+
 -Updated OPNsense firmware, installed the vmware-tools plugin
 -Configured and enabled Netmap(IPS) like this:
+
 <img width="679" height="525" alt="NVIDIA_Overlay_6wqhzsvUgW" src="https://github.com/user-attachments/assets/b653e122-a8f3-44d5-bf0d-103c9d61e826" />
+
  Note: Using Hyperscan for better performance, and enabling it only on my LAN for now.
+
 -Enabling Secure Shell and permitting default root and password since it cant be accessed from WAN right now, in a real environment this would be set up differently
+
 <img width="671" height="523" alt="NVIDIA_Overlay_aj2EmKWc1m" src="https://github.com/user-attachments/assets/ca7d4dc5-05a1-4a1e-af1e-f8977a492079" />
 
 ### Adding Custom IPS Rules
