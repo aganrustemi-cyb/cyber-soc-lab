@@ -2,6 +2,17 @@ I designed and deployed a fully isolated Security Operations Center (SOC) home l
 
 This lab incorporates key defensive and investigative technologies — from log aggregation and correlation to case management and threat intelligence — and is configured to ingest, correlate, and act on telemetry generated internally by simulated attacks.
 
+## Quick links
+-[How i installed and setup my LAB](https://github.com/aganrustemi-cyb/cyber-soc-lab/blob/main/LAB-SETUP.md)
+-[Red team and Blue team cases](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/cases)
+-[Detection rules](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/detection-rules)
+-[Incident responses](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/incident-response)
+-[Mittre Mapping](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/mitre-mapping)
+-[Threat Hunting](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/threat-hunting)
+-[Resources i used](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/resources)
+-[Tools & Configs](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/tools-configs)
+
+
 ### 🔧 Architecture & Core Components
 
 Attack Simulation & Adversary Emulation
