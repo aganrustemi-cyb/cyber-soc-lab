@@ -1,7 +1,7 @@
 # LAB-SETUP — SOC Home Lab Architecture
 
 ## 🚀 Quick Navigation
-*(Click to jump to the section below)*
+Click a link to jump to that section below
 
 - [Kali Linux - Attacker Platform](#kali-linux-attacker-platform)
 - [OPNsense - Perimeter Firewall](#opnsense-perimeter-firewall)
@@ -14,40 +14,48 @@
 
 ---
 
-## 🛠 Kali Linux - Attacker Platform
-*(Content here)*
+## Kali Linux - Attacker Platform
+
+*(Your content goes here)*
 
 ---
 
-## 🔥 OPNsense - Perimeter Firewall
-*(Content here)*
+## OPNsense - Perimeter Firewall
+
+*(Your content goes here)*
 
 ---
 
-## 📊 Wazuh SIEM - Log Aggregation Detection
-*(Content here)*
+## Wazuh SIEM - Log Aggregation Detection
+
+*(Your content goes here)*
 
 ---
 
-## 🐝 TheHive - Case Management
-*(Content here)*
+## TheHive - Case Management
+
+*(Your content goes here)*
 
 ---
 
-## 🤖 Cortex - Automated Analysis
-*(Content here)*
+## Cortex - Automated Analysis
+
+*(Your content goes here)*
 
 ---
 
-## 🧠 MISP - Threat Intelligence Platform
-*(Content here)*
+## MISP - Threat Intelligence Platform
+
+*(Your content goes here)*
 
 ---
 
-## 🛡️ CrowdStrike Falcon - Endpoint Protection EDR
-*(Content here)*
+## CrowdStrike Falcon - Endpoint Protection EDR
+
+*(Your content goes here)*
 
 ---
 
-## 🔄 How Components Interact
-*(Content here)*
+## How Components Interact
+
+*(Your content goes here)*
