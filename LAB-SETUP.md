@@ -1,4 +1,4 @@
-<img width="437" height="324" alt="vmware_syg6dATZr7" src="https://github.com/user-attachments/assets/ab4526ab-2b61-4146-b949-38c1ada13f3a" /># Cybersecurity SOC Home Lab — Full Stack Defensive/Offensive Architecture
+# Cybersecurity SOC Home Lab — Full Stack Defensive/Offensive Architecture
 
 ## 🎯 Purpose of This Lab Setup
 
@@ -110,8 +110,9 @@ sftp://ipadress root@password:22
  ### Deploying Windows Agent
  
  - Downloading the Windows 11 ISO
+   
  - Installing it on VMWare
- - 
+   
   <img width="437" height="324" alt="vmware_syg6dATZr7" src="https://github.com/user-attachments/assets/b4b25390-d286-4ce1-8554-a24114f3e4ab" />
 
  - Installing the agent on the W11 Machine with `Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.3-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='192.168.205.131' WAZUH_AGENT_NAME='Windows11Financee'`
