@@ -104,7 +104,8 @@ sftp://ipadress root@password:22
  
  - Wazuh got installed.
  
- - image_wazuh
+ - <img width="495" height="319" alt="vmware_5Ekx5YDaJJ" src="https://github.com/user-attachments/assets/bd35e201-f35d-45a7-b6d7-7c8cd30f068c" />
+
  
  ### Deploying Windows Agent
  
