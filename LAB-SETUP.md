@@ -94,10 +94,12 @@ sftp://ipadress root@password:22
 ###Configure and installation
 
  -Downloaded and installed latest ubuntu machine on vmware
- -Downloaded vmware tools and curl on ubuntu server
- -Ran '''curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a''' to install the manager.
  
-<img width="844" height="280" alt="NVIDIA_Overlay_6sP6Bk73Tf" src="https://github.com/user-attachments/assets/560c6030-2ee4-4925-9955-aac53999565c" />
+ -Downloaded vmware tools and curl on ubuntu server
+ 
+ -Ran  to install the manager.
+ 
+ <img width="844" height="280" alt="NVIDIA_Overlay_6sP6Bk73Tf" src="https://github.com/user-attachments/assets/560c6030-2ee4-4925-9955-aac53999565c" />
 
  -
 ---
