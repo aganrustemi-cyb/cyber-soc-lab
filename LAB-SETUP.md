@@ -100,11 +100,11 @@ sftp://ipadress root@password:22
  
 - Ran curl `-sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a`  to install the manager.
  
- <img width="844" height="280" alt="NVIDIA_Overlay_6sP6Bk73Tf" src="https://github.com/user-attachments/assets/560c6030-2ee4-4925-9955-aac53999565c" />
+  <img width="844" height="280" alt="NVIDIA_Overlay_6sP6Bk73Tf" src="https://github.com/user-attachments/assets/560c6030-2ee4-4925-9955-aac53999565c" />
  
  - Wazuh got installed.
  
- - <img width="495" height="319" alt="vmware_5Ekx5YDaJJ" src="https://github.com/user-attachments/assets/bd35e201-f35d-45a7-b6d7-7c8cd30f068c" />
+  <img width="495" height="319" alt="vmware_5Ekx5YDaJJ" src="https://github.com/user-attachments/assets/bd35e201-f35d-45a7-b6d7-7c8cd30f068c" />
 
  
  ### Deploying Windows Agent
@@ -112,12 +112,12 @@ sftp://ipadress root@password:22
  - Downloading the Windows 11 ISO
  - Installing it on VMWare
  - 
- - <img width="437" height="324" alt="vmware_syg6dATZr7" src="https://github.com/user-attachments/assets/b4b25390-d286-4ce1-8554-a24114f3e4ab" />
+  <img width="437" height="324" alt="vmware_syg6dATZr7" src="https://github.com/user-attachments/assets/b4b25390-d286-4ce1-8554-a24114f3e4ab" />
 
  - Installing the agent on the W11 Machine with `Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.3-1.msi -OutFile $env:tmp\wazuh-agent; msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER='192.168.205.131' WAZUH_AGENT_NAME='Windows11Financee'`
  - 
 
-<img width="701" height="647" alt="vmware_I6aqGn3Sqx" src="https://github.com/user-attachments/assets/d93f2507-e554-4af3-8240-52344052c6a6" />
+ <img width="701" height="647" alt="vmware_I6aqGn3Sqx" src="https://github.com/user-attachments/assets/d93f2507-e554-4af3-8240-52344052c6a6" />
 
  - Verifying that agent is installed after looking at the endpoints
    
