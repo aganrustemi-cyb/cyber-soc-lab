@@ -361,7 +361,7 @@ ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
 
 
 - **References**
-[Wazuh SIEM & The Hive Integration](https://github.com/ls111-cybersec/wazuh-thehive-integration-ep13?tab=readme-ov-file)
+[Wazuh SIEM & The Hive Integration](https://github.com/ls111-cybersec/wazuh-thehive-integration-ep13?tab=readme-ov-file) \
 [Your Own Free Security Incident Response Platform in Minutes](https://opensecure.medium.com/your-own-free-security-incident-response-platform-in-minutes-bff8c25b45ac)
   
 
