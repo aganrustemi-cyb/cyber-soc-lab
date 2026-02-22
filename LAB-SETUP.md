@@ -151,8 +151,13 @@ Important to note **from now on i switched all of vms to bridged connection so i
   - apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
   - docker run -p 9000:9000 strangebee/thehive:5
 ```
-  - image_installing_docker
-  - image_thehive_showing_onweb
+  - <img width="599" height="458" alt="NVIDIA_Overlay_Bz08Ml25He" src="https://github.com/user-attachments/assets/fcfb990b-460d-4ba0-9ef6-f6fbf0359d10" />
+  
+
+  - <img width="599" height="268" alt="NVIDIA_Overlay_ve9mDciOBB" src="https://github.com/user-attachments/assets/b0ac39d0-595d-4529-9e94-011d1c49600c" />
+
+  - <img width="1202" height="570" alt="NVIDIA_Overlay_lTogS0ZDcd" src="https://github.com/user-attachments/assets/9a183591-6a6a-4a56-99ee-b606cfd74ccf" />
+
   
   ### Integration with Wazuh
   
@@ -344,6 +349,10 @@ ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
   sudo chown root:wazuh /var/ossec/integrations/custom-w2thive.py
   sudo chown root:wazuh /var/ossec/integrations/custom-w2thive
   ```
+
+  -<img width="1469" height="753" alt="NVIDIA_Overlay_eCqZWA0Pey" src="https://github.com/user-attachments/assets/c45e1a3c-5f84-4add-9820-aec40e61ed13" />
+
+  
   - Final step, configuring the ossec.conf file located at `/var/ossec/etc/ossec.conf` and inserting a integration code 
   ``` 
   <ossec_config>
@@ -357,6 +366,24 @@ ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
 …
 </ossec_config>
 ```
+- <img width="683" height="345" alt="NVIDIA_Overlay_m967HmSASm" src="https://github.com/user-attachments/assets/8c58db97-ac62-4a11-bb2b-e0310e840bd1" />
+
+**Note:**You probably already saw what the problem here was, i accidentally edited the code into the `<global>`. And the consequences was that the Wazuh service wasnt starting anymore so heres 
+**how i fixed it**.
+
+- <img width="759" height="204" alt="NVIDIA_Overlay_swzIga3wCh" src="https://github.com/user-attachments/assets/d6de09ef-7db3-4142-9777-a113d53b3e58" />
+
+-Checked to see what exactly isnt letting the service start
+
+- <img width="815" height="141" alt="NVIDIA_Overlay_GOActCPntC" src="https://github.com/user-attachments/assets/0edf2de2-7e48-45eb-9e42-7a22e4568c50" />
+
+-And then i checked the `ossec.conf` file and put it under `<global>` instead of inside it and it worked.
+
+- <img width="431" height="95" alt="NVIDIA_Overlay_TD96gmdhw5" src="https://github.com/user-attachments/assets/93b15d10-4922-4c3a-a34d-467e86874374" />
+
+
+
+
 - Restarting the wazuh-manager with `sudo systemctl restart wazuh-manager`
 
 
