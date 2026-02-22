@@ -136,7 +136,7 @@ Important to note **from now on i switched all of vms to bridged connection so i
 - Created a new Ubuntu Machine to install TheHive on.
 - Used these commands to install through docker 
 
-- <details>
+  <details>
 <summary>Click here to see commands</summary>
   - apt-get update
   - apt-get install \
