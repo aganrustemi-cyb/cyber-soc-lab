@@ -368,7 +368,7 @@ ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
 ```
 - <img width="683" height="345" alt="NVIDIA_Overlay_m967HmSASm" src="https://github.com/user-attachments/assets/8c58db97-ac62-4a11-bb2b-e0310e840bd1" />
 
-**Note:**You probably already saw what the problem here was, i accidentally edited the code into the `<global>`. And the consequences was that the Wazuh service wasnt starting anymore so heres 
+**Note:** You probably already saw what the problem here was, i accidentally edited the code into the `<global>`. And the consequences was that the Wazuh service wasnt starting anymore so heres 
 **how i fixed it**.
 
 - <img width="759" height="204" alt="NVIDIA_Overlay_swzIga3wCh" src="https://github.com/user-attachments/assets/d6de09ef-7db3-4142-9777-a113d53b3e58" />
