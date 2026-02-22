@@ -135,10 +135,8 @@ Important to note **from now on i switched all of vms to bridged connection so i
 
 - Created a new Ubuntu Machine to install TheHive on.
 - Used these commands to install through docker 
-
-  <details>
-<summary>Click here to see commands</summary>
-  - apt-get update
+```bash
+- apt-get update
   - apt-get install \
     ca-certificates \
     curl \
@@ -152,7 +150,7 @@ Important to note **from now on i switched all of vms to bridged connection so i
   - apt-get update
   - apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
   - docker run -p 9000:9000 strangebee/thehive:5
-</details>
+```
   - image_installing_docker
   - image_thehive_showing_onweb
   
