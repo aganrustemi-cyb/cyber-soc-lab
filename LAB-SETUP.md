@@ -339,6 +339,33 @@ case ${DIR_NAME} in
 esac
 ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
 ```
+  - Making sure Wazuh has the correct permissions to run the scripts
+  ```
+  sudo chmod 755 /var/ossec/integrations/custom-w2thive.py
+  sudo chmod 755 /var/ossec/integrations/custom-w2thive
+  sudo chown root:wazuh /var/ossec/integrations/custom-w2thive.py
+  sudo chown root:wazuh /var/ossec/integrations/custom-w2thive
+  ```
+  - Final step, configuring the ossec.conf file located at `/var/ossec/etc/ossec.conf` and inserting a integration code 
+  ``` 
+  <ossec_config>
+…
+  <integration>
+    <name>custom-w2thive</name>
+    <hook_url>192.168.100.156:9000</hook_url>
+    <api_key>API that i created from a new Service user on Wazuh Dashboard</api_key>
+    <alert_format>json</alert_format>
+  </integration>
+…
+</ossec_config>
+```
+- Restarting the wazuh-manager with `sudo systemctl restart wazuh-manager`
+
+
+- **References**
+[Wazuh SIEM & The Hive Integration](https://github.com/ls111-cybersec/wazuh-thehive-integration-ep13?tab=readme-ov-file)
+[Your Own Free Security Incident Response Platform in Minutes](https://opensecure.medium.com/your-own-free-security-incident-response-platform-in-minutes-bff8c25b45ac)
+  
 
 ---
 
