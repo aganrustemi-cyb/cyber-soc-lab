@@ -1,26 +1,71 @@
-## VirusTotal Automation For Wazuh 
+
+# 🔐 Automated Malware Detection & Remediation  
+### Wazuh + VirusTotal Active Response (SOC Automation Project)
+---
+
+## 📌 Project Overview
+
+This project demonstrates an automated malware detection and response workflow using:
+
+- Wazuh File Integrity Monitoring (FIM)
+- VirusTotal Threat Intelligence Integration
+- Custom Active Response Script (Automated File Removal)
+
+The objective is to simulate a real-world SOC automation scenario where malicious files are:
+
+1. Detected  
+2. Validated against threat intelligence  
+3. Automatically removed  
+4. Logged and alerted for analyst visibility  
+
+---
+
+## 🏗 Architecture & Workflow
+
+### 1️⃣ File Integrity Monitoring (FIM)
+
+- Monitors file creation, modification, and deletion.
+- Maintains file hashes.
+- Generates alerts upon file change detection.
+
+### 2️⃣ VirusTotal Integration
+
+- Triggered automatically when a FIM alert occurs.
+- File hash is checked against VirusTotal.
+- If malicious → Active Response is initiated.
+
+### 3️⃣ Automated Remediation
+
+- Custom Python script securely deletes the malicious file.
+- All actions are logged in `active-responses.log`.
+- Custom Wazuh rules generate success/failure alerts.
+
+---
+
+# ⚙️ Implementation
+
+---
+
+## 1️⃣ Enable FIM for Windows Agents
+
+Configured centrally so all enrolled Windows agents automatically receive FIM configuration.
+
+<img width="787" height="224" alt="NVIDIA_Overlay_mW5MmbWFrl" src="https://github.com/user-attachments/assets/ab5d2ad9-9f23-453c-84b0-eaf31d2be038" />
+
+<img width="1179" height="292" alt="NVIDIA_Overlay_sjhxmcsRle" src="https://github.com/user-attachments/assets/2ed418ab-0afd-4029-b506-f345ffc4a676" />
 
 
-### What does this automation do?
+---
 
-- Wazuh FIM looks for any file addition, change, or deletion on the monitored folders. This module has the hash of these files stored and triggers alerts when it detects any changes.
+## 2️⃣ Configure VirusTotal Integration
 
-- Wazuh then tiggers VirusTotal integration whenever an FIM alert occurs, then scans the file for any malware
- 
-- Deletes the file if the VT scan shows any malware
+Added to:
 
+```
 
+/var/ossec/etc/ossec.conf
 
-### How i set this up
-
-- Enabling FIM for all of my Windows Agents so the configuration happens automatically for every new agent
-
-<img width="787" height="224" alt="NVIDIA_Overlay_mW5MmbWFrl" src="https://github.com/user-attachments/assets/7939af49-f9de-48eb-b400-ecfc87d5c4e8" />
-
-<img width="1179" height="292" alt="NVIDIA_Overlay_sjhxmcsRle" src="https://github.com/user-attachments/assets/5faaf457-c0de-4217-b726-0561e051e764" />
-
-
-- Adding the VirusTotal integration to my `/var/ossec/etc/ossec.conf`
+````
 
 ```xml
 <integration>
@@ -29,12 +74,13 @@
   <group>syscheck</group>
   <alert_format>json</alert_format>
 </integration>
-```
+````
 
-<img width="581" height="462" alt="NVIDIA_Overlay_0PYYS5VIp1" src="https://github.com/user-attachments/assets/d0d91a72-9d54-4b87-b134-efb12442f886" />
+---
 
+## 3️⃣ Custom Active Response Script
 
-- Creating the remove malware script.exe
+The following script securely removes malicious files detected by VirusTotal.
 
 ```python
 # Copyright (C) 2015-2025, Wazuh Inc.
@@ -129,11 +175,9 @@ def send_keys_and_check_message(argv, keys):
 def secure_delete_file(filepath_str, ar_name):
     filepath = pathlib.Path(filepath_str)
 
-    # Reject NTFS alternate data streams
     if '::' in filepath_str:
         raise Exception(f"Refusing to delete ADS or NTFS stream: {filepath_str}")
 
-    # Reject symbolic links and reparse points
     if os.path.islink(filepath):
         raise Exception(f"Refusing to delete symbolic link: {filepath}")
 
@@ -143,11 +187,9 @@ def secure_delete_file(filepath_str, ar_name):
 
     resolved_filepath = filepath.resolve()
 
-    # Ensure it's a regular file
     if not resolved_filepath.is_file():
         raise Exception(f"Target is not a regular file: {resolved_filepath}")
 
-  # Perform deletion
     os.remove(resolved_filepath)
 
 def main(argv):
@@ -191,8 +233,15 @@ if __name__ == "__main__":
     main(sys.argv)
 ```
 
-- Used PyCharm to compile this and convert it to an .exe so that the Windows Agent can run it and pasted it into `C:\Program Files (x86)\ossec-agent\active-response\bin` directory
-- Enabled active response and added a new command to my ossec.conf file
+The script was compiled to `.exe` and placed in:
+
+```
+C:\Program Files (x86)\ossec-agent\active-response\bin
+```
+
+---
+
+## 4️⃣ Active Response Configuration
 
 ```xml
 <ossec_config>
@@ -210,7 +259,17 @@ if __name__ == "__main__":
   </active-response>
 </ossec_config>
 ```
-- Added two new rules on my `/var/ossec/etc/rules/local_rules.xml` file to alert about the active response results 
+
+---
+
+## 5️⃣ Custom Detection Rules
+
+Added to:
+
+```
+/var/ossec/etc/rules/local_rules.xml
+```
+
 ```xml
 <group name="virustotal,">
   <rule id="100092" level="12">
@@ -226,10 +285,35 @@ if __name__ == "__main__":
   </rule>
 </group>
 ```
-## Results
 
-<img width="1035" height="221" alt="vmware_Iji54xGNM3" src="https://github.com/user-attachments/assets/f7a19903-f86c-4439-bfb5-b65d76fa52e6" />
+---
 
+# 📊 Results
 
-## References 
-[Wazuh Documentation](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.html)
+<img width="1035" height="221" alt="vmware_Iji54xGNM3" src="https://github.com/user-attachments/assets/07299d40-d9de-4a30-ad02-8b0bfa7d0680" />
+
+* ✅ Malicious file detected via FIM
+* ✅ Hash checked against VirusTotal
+* ✅ Threat confirmed
+* ✅ File securely removed
+* ✅ Alert generated for SOC visibility
+
+---
+
+# 🧠 Skills Demonstrated
+
+* SIEM Configuration (Wazuh)
+* Threat Intelligence Integration
+* Active Response Automation
+* Secure File Handling
+* SOC Workflow Simulation
+* Detection Engineering
+* Log Analysis & Custom Rule Writing
+
+---
+
+# 📚 References
+
+* Wazuh Official Documentation
+  [https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.html](https://documentation.wazuh.com/current/proof-of-concept-guide/detect-remove-malware-virustotal.html)
+
