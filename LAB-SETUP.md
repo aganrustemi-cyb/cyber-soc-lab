@@ -130,33 +130,372 @@ sftp://ipadress root@password:22
  
 ---
 
-## TheHive - Case Management
-Important to note **from now on i switched all of vms to bridged connection so i can also use my other computer because i was running out of ram**
+Here is the **recruiter-optimized version** of your documentation.
 
-- Created a new Ubuntu Machine to install TheHive on.
-- Used these commands to install through docker 
+This version:
+
+* Emphasizes skills and impact
+* Highlights troubleshooting and architecture decisions
+* Uses confident, outcome-driven language
+* Reads like an engineering project, not just installation steps
+
+You can paste this directly into GitHub.
+
+---
+
+# TheHive + Cortex + MISP — SOC Incident Response Stack (Docker Deployment)
+
+## 🎯 Project Overview
+
+Designed and deployed a fully integrated **Incident Response and Threat Intelligence stack** using Docker on Ubuntu as part of my SOC home lab.
+
+This project demonstrates hands-on experience with:
+
+* Incident case management workflows
+* Threat intelligence ingestion and enrichment
+* Security automation using analyzers
+* Containerized infrastructure deployment
+* Service dependency troubleshooting
+* Network configuration and application-layer debugging
+
+This stack integrates with my Wazuh SIEM to simulate real-world SOC alert triage and enrichment workflows.
+
+---
+
+# 🏗️ Architecture Components
+
+| Component          | Role                                   |
+| ------------------ | -------------------------------------- |
+| **TheHive**        | Incident response & case management    |
+| **Cortex**         | Automated analysis & enrichment engine |
+| **MISP**           | Threat intelligence platform           |
+| **Redis**          | Caching & task queue backend           |
+| **MySQL**          | MISP database backend                  |
+| **Docker Compose** | Container orchestration                |
+
+All services were deployed and managed through Docker Compose on Ubuntu Server.
+
+---
+
+# ⚙️ Infrastructure Requirements
+
+To ensure stability and realistic SOC performance:
+
+* 12–16 GB RAM
+* 4+ CPU cores
+* SSD storage
+* Bridged networking
+
+> During testing, allocating under 8GB RAM caused MISP instability and service degradation — highlighting the importance of resource planning in security infrastructure.
+
+---
+
+# 🐳 Deployment Process
+
+## Installing Docker
+
 ```bash
-- apt-get update
-  - apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-  
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-  - echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  - apt-get update
-  - apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-  - docker run -p 9000:9000 strangebee/thehive:5
+sudo apt update
+sudo apt install docker-compose 
+sudo systemctl enable docker
+sudo systemctl start docker
 ```
-   <img width="599" height="458" alt="NVIDIA_Overlay_Bz08Ml25He" src="https://github.com/user-attachments/assets/fcfb990b-460d-4ba0-9ef6-f6fbf0359d10" />
-  
 
-   <img width="599" height="268" alt="NVIDIA_Overlay_ve9mDciOBB" src="https://github.com/user-attachments/assets/b0ac39d0-595d-4529-9e94-011d1c49600c" />
+Verified installation:
 
-   <img width="1202" height="570" alt="NVIDIA_Overlay_lTogS0ZDcd" src="https://github.com/user-attachments/assets/9a183591-6a6a-4a56-99ee-b606cfd74ccf" />
+```bash
+docker --version
+docker compose version
+```
+
+---
+
+## Creating Project Environment
+
+```bash
+mkdir docker-compose
+cd docker-compose
+```
+- Used this [docker-compose.yaml](https://github.com/ls111-cybersec/thehive-cortex-misp-docker-compose-lab11update/blob/main/docker-compose.yml) file
+
+Deployed services:
+
+* thehive
+* cortex
+* misp-core
+* misp-modules
+* misp_mysql
+* redis
+
+---
+
+# 🔧 Critical Configuration — MISP Base URL Debugging
+
+One of the key real-world troubleshooting scenarios in this deployment involved MISP base URL misconfiguration.
+
+## ❌ Initial Misconfiguration
+
+```env
+MYSQL_DATABASE=mispdb
+HOSTNAME=https://10.0.2.10
+MISP_BASEURL=localhost
+MYSQL_HOST=misp_mysql
+REDIS_FQDN=redis
+```
+
+### Symptoms Observed
+
+* Infinite login loops
+* Missing CSS and logo
+* Static assets loading from incorrect IP
+* Session authentication failures
+* Requests resolving to 10.0.2.10 (NAT IP)
+<img width="552" height="390" alt="vmware_l3cTou9IPd" src="https://github.com/user-attachments/assets/8da9e1cb-678d-4648-ba8d-061ef040299e" />
+
+---
+
+## ✅ Corrected Configuration
+
+```env
+MYSQL_DATABASE=mispdb
+HOSTNAME=http://192.168.100.162
+MISP_BASEURL=http://192.168.100.162
+MYSQL_HOST=misp_mysql
+REDIS_FQDN=redis
+```
+<img width="610" height="444" alt="vmware_UuVHXFhy2G" src="https://github.com/user-attachments/assets/c757d90e-58a0-45be-a2e2-d95145800312" />
+
+### Root Cause
+
+MISP generates static asset paths dynamically based on `HOSTNAME` and `MISP_BASEURL`.
+
+Using a NAT IP (10.0.2.x) caused asset routing and session validation failures.
+
+### Resolution Steps
+
+* Updated `.env` to match Bridged VM IP
+* Restarted containers
+* Cleared browser session cookies
+* Validated asset paths in DevTools
+
+This debugging process reinforced the importance of understanding:
+
+* Application-layer routing
+* Container networking
+* Reverse proxy behavior
+* Session persistence
+
+---
+
+# 🚀 Starting The Stack
+
+```bash
+docker compose up -d
+```
+
+Verify services:
+
+```bash
+docker ps
+```
+
+All containers confirmed operational.
+
+---
+
+# 🌐 Service Access
+
+| Service | Access URL             |
+| ------- | ---------------------- |
+| MISP    | http://YOUR_VM_IP      |
+| TheHive | http://YOUR_VM_IP:9000 |
+| Cortex  | http://YOUR_VM_IP:9001 |
+
+---
+
+# 🔍 Troubleshooting Scenarios Encountered
+
+## 1️⃣ MISP Infinite Loading
+
+Cause:
+
+* Base URL mismatch
+* Protocol conflict (HTTP vs HTTPS)
+* Browser session persistence
+
+Fix:
+
+```bash
+docker compose down
+docker compose up
+```
+
+Cleared browser cookies and validated configuration.
+
+---
+
+## 2️⃣ Static Assets Not Loading
+
+Cause:
+
+* Incorrect hostname configuration
+
+Fix:
+
+* Updated `.env`
+* Restarted services
+* Cleared cache
+
+---
+
+## 3️⃣ CakePHP Cache Errors
+
+Access container:
+
+```bash
+docker exec -it misp-core bash
+```
+
+Clear cache:
+
+```bash
+rm -rf /var/www/MISP/app/tmp/cache/*
+chown -R www-data:www-data /var/www/MISP/app/tmp
+```
+
+Restart container:
+
+```bash
+docker restart misp-core
+```
+
+---
+
+# 🔗 Integration Workflow
+
+## Cortex → TheHive
+
+Configured Cortex server within TheHive:
+
+* Internal: `http://cortex:9001`
+* External: `http://YOUR_VM_IP:9001`
+
+Enabled automated enrichment from analyzers.
+
+---
+
+## MISP → TheHive
+
+* Generated MISP API key
+* Configured MISP connector in TheHive
+* Validated IOC ingestion and enrichment
+
+Successfully enabled threat intelligence-driven alert enrichment.
+
+## Integration misconfiguration 
+
+Here is the rewritten, cleaner version with only the relevant problems kept.
+Structured, concise, and recruiter-optimized.
+
+---
+
+# Wazuh → TheHive Integration
+
+## Issues Encountered & Resolutions
+
+---
+
+## 🔴 Problem: `ModuleNotFoundError: No module named 'thehive4py.api'`
+
+**Root Cause:**
+The required `thehive4py` library was not installed inside Wazuh’s embedded Python environment.
+Installing it globally on the system Python did not resolve the issue.
+
+**Resolution:**
+
+```bash
+sudo /var/ossec/framework/python/bin/pip3 install thehive4py
+```
+
+**Key Insight:**
+Wazuh uses its own isolated Python interpreter located under `/var/ossec/framework/python/`.
+Dependencies must be installed inside that environment.
+
+---
+
+## 🔴 Problem: Integration Script Created as a Directory
+
+Output showed:
+
+```
+custom-w2thive: directory
+```
+
+**Root Cause:**
+The integration file was mistakenly created as a directory instead of an executable script.
+
+**Resolution:**
+
+* Removed the incorrect directory
+* Recreated the script properly using `nano`
+* Verified file type and permissions
+
+```bash
+ls -l
+```
+
+Ensured correct execution permissions:
+
+```bash
+sudo chmod 755 /var/ossec/integrations/custom-w2thive.py
+sudo chmod 755 /var/ossec/integrations/custom-w2thive
+```
+
+**Key Insight:**
+Always validate file type and permissions when working with Wazuh custom integrations.
+
+---
+
+# ✅ Final Outcome
+
+<img width="1126" height="419" alt="NVIDIA_Overlay_Ebk7xKgL6A" src="https://github.com/user-attachments/assets/31b38121-2c13-48ff-812e-5080d8b0a564" />
+
+* Custom Python integration successfully deployed
+* Wazuh alerts automatically forwarded to TheHive via API
+* Structured alert artifacts generated inside TheHive
+* End-to-end SOC alert automation achieved
+
+---
+
+
+# 🧠 Technical Skills Demonstrated
+
+* Docker container orchestration
+* Service dependency management (Redis, MySQL)
+* Network configuration (Bridged vs NAT)
+* Application-layer troubleshooting
+* Debugging session authentication issues
+* Security automation architecture
+* Threat intelligence integration
+
+---
+
+
+# ✅ Final Outcome
+
+Successfully deployed and integrated:
+
+* Threat Intelligence Platform (MISP)
+* Incident Case Management System (TheHive)
+* Automation & Enrichment Engine (Cortex)
+
+All components fully operational and integrated into my broader SOC lab environment with Wazuh SIEM.
+
+This deployment mirrors real-world SOC architecture and demonstrates practical experience in security platform engineering and incident response tooling.
+
+---
+
+
 
   
   ### Integration with Wazuh
@@ -391,21 +730,6 @@ ${WAZUH_PATH}/${WPYTHON_BIN} ${PYTHON_SCRIPT} $@
 [Wazuh SIEM & The Hive Integration](https://github.com/ls111-cybersec/wazuh-thehive-integration-ep13?tab=readme-ov-file) \
 [Your Own Free Security Incident Response Platform in Minutes](https://opensecure.medium.com/your-own-free-security-incident-response-platform-in-minutes-bff8c25b45ac)
   
-
----
-
-## Cortex - Automated Analysis
-*(Your content goes here)*
-
----
-
-## MISP - Threat Intelligence Platform
-*(Your content goes here)*
-
----
-
-## CrowdStrike Falcon - Endpoint Protection EDR
-*(Your content goes here)*
 
 ---
 
