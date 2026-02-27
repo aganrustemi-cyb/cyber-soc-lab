@@ -1,70 +1,203 @@
-I designed and deployed a fully isolated Security Operations Center (SOC) home lab that mirrors the workflows and tooling used in modern enterprise security operations. This environment is intended for hands-on practice with both offense (attack simulation) and defense (detection, analysis, and response), giving me practical experience that goes far beyond theoretical study.
+# 🛡️ Cyber SOC Home Lab
 
-This lab incorporates key defensive and investigative technologies — from log aggregation and correlation to case management and threat intelligence — and is configured to ingest, correlate, and act on telemetry generated internally by simulated attacks.
+> A fully isolated, enterprise-grade Security Operations Center built from scratch — simulating real Tier 1–2 SOC analyst workflows across attack simulation, detection engineering, incident response, and threat intelligence.
 
-## Quick links
+---
 
--[How i installed and setup my LAB](https://github.com/aganrustemi-cyb/cyber-soc-lab/blob/main/LAB-SETUP.md)
+## 📁 Repository Navigation
 
--[Red team and Blue team cases](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/cases)
+| Section | Description |
+|---|---|
+| [⚙️ Lab Setup](https://github.com/aganrustemi-cyb/cyber-soc-lab/blob/main/LAB-SETUP.md) | Full architecture, deployment steps, and integration documentation |
+| [🔴🔵 Red & Blue Team Cases](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/cases) | Attack scenarios paired with detection and response walkthroughs |
+| [🔍 Detection Rules](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/detection-rules) | Custom Wazuh and Suricata rules written for the lab environment |
+| [🚨 Incident Response](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/incident-response) | Structured IR reports and response playbooks |
+| [🗺️ MITRE ATT&CK Mapping](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/mitre-mapping) | Techniques mapped to the ATT&CK framework |
+| [🕵️ Threat Hunting](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/threat-hunting) | Hypothesis-driven hunts conducted across lab telemetry |
+| [📚 Resources](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/resources) | References and learning material used throughout the build |
+| [🔧 Tools & Configs](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/tools-configs) | Configuration files, scripts, and integration artifacts |
 
--[Detection rules](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/detection-rules)
+---
 
--[Incident responses](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/incident-response)
+## 🏗️ Lab Architecture
 
--[Mittre Mapping](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/mitre-mapping)
+```
+┌──────────────────────────────────────────────┐
+│          ATTACK SIMULATION                   │
+│     Kali Linux — adversary emulation         │
+└─────────────────┬────────────────────────────┘
+                  │
+┌─────────────────▼────────────────────────────┐
+│          PERIMETER SECURITY                  │
+│     OPNsense Firewall + Suricata IPS         │
+└─────────────────┬────────────────────────────┘
+                  │
+┌─────────────────▼────────────────────────────┐
+│       SIEM / LOG AGGREGATION / EDR           │
+│  Wazuh — correlation, alerting, FIM, SCA     │
+└─────────────────┬────────────────────────────┘
+                  │  alert forwarding
+┌─────────────────▼────────────────────────────┐
+│       INCIDENT RESPONSE & THREAT INTEL       │
+│  TheHive (cases) · Cortex (enrichment)       │
+│  MISP (IOCs, TTPs, threat intelligence)      │
+└──────────────────────────────────────────────┘
+```
 
--[Threat Hunting](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/threat-hunting)
+---
 
--[Resources i used](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/resources)
+## 🧰 Stack Overview
 
--[Tools & Configs](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/tools-configs)
+| Component | Role |
+|---|---|
+| **Kali Linux** | Attack simulation — generates realistic threat telemetry |
+| **OPNsense** | Perimeter firewall — traffic segmentation + Suricata IPS |
+| **Wazuh** | SIEM + EDR — log aggregation, detection, FIM, endpoint monitoring |
+| **TheHive** | Incident case management — structured triage and investigation |
+| **Cortex** | Enrichment engine — automated IOC analysis via analyzers |
+| **MISP** | Threat intelligence — IOC feeds, TTP context, campaign data |
 
+---
 
-### 🔧 Architecture & Core Components
+## 🔄 SOC Workflow — Alert Lifecycle
 
-Attack Simulation & Adversary Emulation
-Using Kali Linux and purpose-built attack vectors to generate realistic threat activity that produces detectable telemetry across defensive stacks.
+A key goal of this lab is to practice the **end-to-end alert lifecycle** that a SOC analyst handles daily. Every simulated attack flows through the full pipeline:
 
-Edge Security & Network Traffic Control
-OPNsense serves as the virtual perimeter firewall, enforcing segmentation and forwarding traffic logs for centralized analysis.
+```
+1. GENERATE      →  Adversary activity simulated from Kali Linux
+2. DETECT        →  Suricata IPS + Wazuh rules fire on suspicious telemetry
+3. ALERT         →  Wazuh raises structured security event
+4. FORWARD       →  Custom integration pushes alert to TheHive automatically
+5. TRIAGE        →  Alert reviewed, severity assessed, case opened in TheHive
+6. ENRICH        →  Cortex analyzers run on observables (IPs, hashes, domains)
+7. CONTEXTUALIZE →  MISP cross-references IOCs against threat intelligence feeds
+8. RESPOND       →  Response actions documented; IR report produced
+9. MAP           →  Technique mapped to MITRE ATT&CK framework
+```
 
-Centralized Monitoring & Event Correlation
-Wazuh SIEM aggregates logs from agents, endpoints, and firewalls to perform correlation, alerting, and pattern detection across data sources.
+This pipeline mirrors the workflow a Tier 1–2 analyst follows on every shift.
 
-Incident Case Management & Automation
-TheHive enables structured investigation workflows, while Cortex automates enrichment of observables within incidents.
+---
 
-Threat Intelligence Integration
-MISP provides contextual threat data (IOCs, TTPs, campaigns) which enriches detection logic and improves alert relevance.
+## 🎯 What This Lab Demonstrates
 
-Endpoint Visibility & Response
-CrowdStrike Falcon EDR augments endpoint telemetry, offering real-time behavioral detection and enhanced analytical data.
+This build goes beyond installing tools. It demonstrates the ability to **integrate, configure, and orchestrate** multiple security systems into a cohesive detection and response pipeline — replicating infrastructure used in real SOC environments.
 
-Together, this stack forms a defense-in-depth SOC environment, capturing the full lifecycle of alert generation, detection, investigation, and response — effectively training for real Tier 1–Tier 2 SOC analyst responsibilities.
+**Core competencies practiced:**
 
-### 🎯 What This Build Demonstrates
+- Centralized log collection and cross-source event correlation
+- Custom detection rule authoring and tuning (Wazuh + Suricata)
+- Alert generation from simulated adversary activity
+- Case creation, triage, and structured investigation workflows (TheHive)
+- Automated observable enrichment (Cortex analyzers)
+- Threat intelligence integration and IOC-driven detection (MISP)
+- MITRE ATT&CK technique mapping and adversary emulation
+- Hypothesis-driven threat hunting across SIEM telemetry
+- End-to-end incident response documentation
 
-This lab goes beyond installing tools: it shows integration, configuration, and workflow orchestration among multiple security systems, replicating a realistic monitoring and response infrastructure similar to what’s used in real SOC teams. The lab has enabled me to practice:
+Together, this stack covers the **full alert lifecycle** — from telemetry generation through detection, investigation, enrichment, and response — directly mirroring Tier 1–2 SOC analyst responsibilities.
 
-Centralized log collection and event correlation
+---
 
-Custom alert creation and tuning
+## 🗺️ MITRE ATT&CK Coverage
 
-Generation of actionable security alerts from simulated attacks
+Simulated attacks and detections in this lab are mapped to the [MITRE ATT&CK Framework](https://attack.mitre.org/), documenting which techniques were emulated, detected, and responded to.
 
-Case creation, triage, and investigation workflows
+| Tactic | Example Techniques Covered |
+|---|---|
+| **Reconnaissance** | T1046 — Network Service Scanning (Nmap) |
+| **Discovery** | T1082 — System Information Discovery |
+| **Lateral Movement** | T1021 — Remote Services |
+| **Command & Control** | T1071 — Application Layer Protocol |
+| **Credential Access** | T1110 — Brute Force |
+| **Exfiltration** | T1041 — Exfiltration Over C2 Channel |
 
-Enrichment with threat intelligence and automated analysis
+> Full technique mapping available in the [MITRE Mapping folder](https://github.com/aganrustemi-cyb/cyber-soc-lab/tree/main/mitre-mapping).
 
-Endpoint behavioral monitoring
+---
 
-This build illustrates my ability to deploy, integrate, and operate complex security tooling, replicate adversary activity, and extract meaningful insights through analysis — core competencies expected of entry to mid-level SOC analysts.
+## 🔬 Skills & Tools Index
 
+A quick-reference index of the technologies and skills demonstrated across this repository — aligned with common SOC analyst job requirements.
 
-### View this spoiler for easier navigation through my documentation
-<details>
-  <summary>Click to view lab </summary>
-  <img width="423" height="749" alt="brave_xtZIniFb9U" src="https://github.com/user-attachments/assets/0a6c886b-c991-4edd-9cd4-6bf7e925b790" />
+**SIEM & Detection**
+`Wazuh` `Suricata` `Custom Detection Rules` `Log Correlation` `Alert Tuning` `FIM` `SCA`
 
-</details>
+**Incident Response**
+`TheHive` `Case Management` `Alert Triage` `IR Documentation` `Response Playbooks`
+
+**Threat Intelligence**
+`MISP` `IOC Enrichment` `TTP Mapping` `Threat Feeds` `MITRE ATT&CK`
+
+**Security Automation**
+`Cortex` `Python Scripting` `REST API Integration` `Wazuh Custom Integrations`
+
+**Network Security**
+`OPNsense` `Firewall Configuration` `IPS/IDS` `Traffic Segmentation` `Network Forensics`
+
+**Infrastructure & Deployment**
+`Docker` `Docker Compose` `Linux Administration` `VMware` `Ubuntu Server`
+
+**Offensive / Adversary Emulation**
+`Kali Linux` `Nmap` `Attack Simulation` `Red Team Scenarios`
+
+---
+
+## 📊 Lab at a Glance
+
+| Metric | Value |
+|---|---|
+| **VMs deployed** | 5 (Kali, OPNsense, Wazuh, Ubuntu/Docker, Windows 11) |
+| **Integrated services** | 6 (Wazuh, TheHive, Cortex, MISP, OPNsense, Kali) |
+| **Custom integrations built** | 1 (Wazuh → TheHive Python pipeline) |
+| **Detection rule sources** | Wazuh built-in + custom Suricata rules |
+| **Deployment method** | VMware (VMs) + Docker Compose (IR stack) |
+| **Network architecture** | Isolated LAN subnet + NAT WAN |
+
+---
+
+## 🗂️ Repository Structure
+
+```
+Cyber-SOC-Lab/
+│
+├── README.md
+├── ABOUT_ME.md
+├── CERTIFICATIONS.md
+├── SKILLS-MATRIX.md
+├── LAB-SETUP.md
+│
+├── cases/
+│   ├── red-team/
+│   │   └── Case-001-Example/
+│   │       ├── README.md
+│   │       ├── evidence/
+│   │       ├── notes.md
+│   │       └── artifacts/
+│   │
+│   └── blue-team/
+│       └── Case-001-Example/
+│           ├── README.md
+│           ├── evidence/
+│           ├── notes.md
+│           └── artifacts/
+│
+├── detection-rules/
+│   ├── sigma/
+│   ├── wazuh/
+│   └── splunk/
+│
+├── threat-hunting/
+│   ├── TH-001/
+│   └── TH-002/
+│
+├── incident-response/
+│   ├── IR-001/
+│   └── IR-002/
+│
+├── tools-configs/
+│
+├── mitre-mapping/
+│
+└── resources/
+```
