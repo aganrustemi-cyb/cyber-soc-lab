@@ -194,7 +194,7 @@ Post-containment scan from Kali confirmed the block was active:
 nmap -p 3389 192.168.100.161
 ```
 
-![Nmap from Kali — host unreachable, OPNsense block rule confirmed active](./evidence/nmaphost.png)
+![Nmap from Kali — host unreachable, OPNsense block rule confirmed active](./evidence/nmap-host.png)
 *Nmap post-containment — host reported as down, connection filtered. OPNsense block rule confirmed effective.*
 
 ---
